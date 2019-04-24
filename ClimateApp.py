@@ -56,16 +56,17 @@ def prcp():
     '''Return a JSON list of precipitation data with "date" set as key'''
 
     # Query for all precipitation data
-    prcp_retrv = session.query(Measurement.date, Measurement.prcp).\
-    order_by(Measurement.date).all()
+    prcp_retrv = session.query(Station.station, Measurement.date, Measurement.prcp).\
+        filter(Station.station == Measurement.station).order_by(Measurement.date).all()
 
     # Close session
     session.close()
 
     # Create list of dictionaries data type to store "prcp" data with "date" set as key
     all_prcp = []
-    for date, prcp in prcp_retrv:
+    for sta, date, prcp in prcp_retrv:
         prcp_dict = {}
+        prcp_dict['station'] = sta
         prcp_dict[date] = prcp
         all_prcp.append(prcp_dict)
     
@@ -117,17 +118,19 @@ def tobs_1yr():
     date_thold_1yr = str(dt.datetime.strptime(date_latest, "%Y-%m-%d") - dt.timedelta(days=365))[:10]
     
     # Query for ("date", "tobs") data within one-year interval from "date_latest"
-    tobs_1yr_retrv = session.query(Measurement.date, Measurement.tobs).\
-        filter(Measurement.date >= date_thold_1yr).order_by(Measurement.date).all()
+    tobs_1yr_retrv = session.query(Station.station, Measurement.date, Measurement.tobs).\
+        filter(Station.station == Measurement.station).filter(Measurement.date >= date_thold_1yr).\
+        order_by(Measurement.date).all()
     
     # Close session
     session.close()
 
     # Create list of dictionaries data type to store "date" and "tobs" data within one year interval from the latest documented date
     all_tobs_1yr = []
-    for date, tobs in tobs_1yr_retrv:
+    for sta, date, tobs in tobs_1yr_retrv:
         tobs_1yr_dict = {}
         tobs_1yr_dict['date'] = date
+        tobs_1yr_dict['station'] = sta
         tobs_1yr_dict['tobs'] = tobs
         all_tobs_1yr.append(tobs_1yr_dict)
     
