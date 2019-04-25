@@ -15,9 +15,9 @@
     <!--Display available routes as bulleted list-->
     <ul type='circle'>
     <!--Hyperlink to designated module-->
-    <li><a href="{{ url_for('prcp') }}"><h3>/api/precipitation</h3></a></li>
-    <li><a href="{{ url_for('sta') }}"><h3>/api/stations</h3></a></li>
-    <li><a href="{{ url_for('tobs_1yr') }}"><h3>/api/temperature</h3></a></li>
+    <li><a href="http://localhost:5000/api/precipitation"><h3>/api/precipitation</h3></a></li>
+    <li><a href="http://localhost:5000/api/stations"><h3>/api/stations</h3></a></li>
+    <li><a href="http://localhost:5000/api/temperature"><h3>/api/temperature</h3></a></li>
     <!--Pass input named "date_shuttle" from "form input" to "tobs_start" module in ClimateApp-->
     <li><form method='post' action="{{ url_for('tobs_start')}}"><h3>/api/<span style="color:blue">start</span><sup>*</sup></h3>
       Enter start date: <input type='date' name='date_shuttle'><input type='submit'></form></li>
@@ -40,5 +40,3 @@
     </footer>
   </body>
 </html>
-
-<img src="" alt="">
