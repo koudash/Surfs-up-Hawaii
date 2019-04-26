@@ -1,0 +1,28 @@
+.-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 60px;
+}
+
+#demoHeader {
+  position: relative;
+  color: blueviolet;
+  text-shadow: 3px 2px lightskyblue;
+  font-size: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+hr {
+  margin-left: 0;
+}
+
+.routes {
+  font-size: 25px;
+  line-height: 1.6;
+}
+
+.font-decr {
+  font-size: 15px;
+}

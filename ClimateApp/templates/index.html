@@ -5,54 +5,65 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Index for ClimateApp</title>
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <!-- Avoid fake favicon requests -->
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     </head>
     <body>
-        <!-- Set background color for route list -->
-        <div style="background-color:greenyellow">
-            <h1>Available ClimateApp Routes:</h1>
-            <!--Add horizontal line-->
-            <hr align='left' width='50%' noshade/>
-            <!--Display available routes as bulleted list-->
-            <ul type='circle'>
-                <!-- Hyperlink to webpage of designated module -->
-                <li><a href="/api/precipitation" target=_blank><h3>/api/precipitation</h3></a></li>
-                <li><a href="/api/stations" target=_blank><h3>/api/stations</h3></a></li>
-                <li><a href="/api/temperature" target=_blank><h3>/api/temperature</h3></a></li>
-                <!-- Concatenate date input with basic localhost url and hyperlink to webpage -->
-                <li><form id = "s_form" onsubmit="s_append()" method='post' target=_blank><h3>/api/<span style="color:blue">start</span><sup>*</sup></h3>Enter start date: 
-                    <input type="date" name="s">
-                    <input type="submit" value="Search">
-                    </form></li>                             
-                <li><form id = "se_form" onsubmit="se_append()" method='post' target=_blank><h3>/api/<span style="color:blue">start</span>/<span style="color:blue">end</span><sup>**</sup></h3>
-                    Enter start date: <input type="date" name="s_se">&emsp;Enter end date: <input type="date" name="e_se">
-                    <input type="submit" value="Search">
-                    </form></li>
-                
-                    <script>
-                    function s_append(){
-                      var action_src = "/api/" + document.getElementsByName("s")[0].value;
-                      var s_form = document.getElementById('s_form');
-                      s_form.action = action_src;
-                  }
-                    function se_append(){
-                        var action_src = "/api/" + document.getElementsByName("s_se")[0].value + "/" + document.getElementsByName("e_se")[0].value;
-                        var se_form = document.getElementById('se_form');
-                        se_form.action = action_src;
+        <header class="-container">
+            <div id="demoHeader"><strong>Available Climate APIs:</strong></div>
+        </header>
+        <hr width='75%' noshade/>          
+        <ul type='circle'>
+            <!-- Hyperlink to webpage of designated module -->
+            <li class="routes"><a href="/api/precipitation" target=_blank><strong>/api/precipitation</strong></a></li>
+            <li class="routes"><a href="/api/stations" target=_blank><strong>/api/stations</strong></a></li>
+            <li class="routes"><a href="/api/temperature" target=_blank><strong>/api/temperature</strong></a></li>
+            <!-- Concatenate date input with basic localhost url and hyperlink to webpage -->
+            <li class="routes"><form id = "s_form" onsubmit="s_append()" method='post' target=_blank>
+                <strong>/api/<mark>start</mark></strong>&emsp;&emsp;&emsp;
+                <span class="font-decr">Enter start date: </span>
+                <input type="date" name="s">
+                <input type="submit" value="Search">
+                </form></li>                             
+            <li class="routes"><form id = "se_form" onsubmit="se_append()" method='post' target=_blank>
+                <strong>/api/<mark>start</mark>/<mark>end</mark></strong>&emsp;&nbsp;
+                <span class="font-decr">Enter start date: </span>
+                <input type="date" name="s_se">&emsp;
+                <span class="font-decr">Enter end date: </span>
+                <input type="date" name="e_se">
+                <input type="submit" value="Search">
+                </form></li>
+                <!-- Scripts to concatenate date input (value rather than name&value) into url hyperlink to it -->
+                <script>
+                function s_append(){
+                    var action_src = "/api/" + document.getElementsByName("s")[0].value;
+                    var s_form = document.getElementById('s_form');
+                    s_form.action = action_src;
                 }
-                    </script>                 
-            </ul>
+                function se_append(){
+                    var action_src = "/api/" + document.getElementsByName("s_se")[0].value + "/" + document.getElementsByName("e_se")[0].value;
+                    var se_form = document.getElementById('se_form');
+                    se_form.action = action_src;
+                }
+                </script>                 
+        </ul>
         </div>
-        <hr align='left' width='50%'/>
-        <!--Paragraph-->
-        <p><strong>*,**: <span style="color:blue"> start</span>, <span style="color:blue">end</span></strong> represent start and end dates for temperature query in the format of <strong>"yyyy-mm-dd"</strong>.<br/>
-            <strong>NOTE:</strong> Date entry between "2010-01-01" and "2017-08-23", inclusive.</p>
-        <hr align='left' width='50%'/>
-        <!--Add footer-->
-        <br/>
-        <br/>
+        <hr width=75%/>
+        <div><strong>NOTE:</strong></div>
+        <ol>
+            <li>API queries can be commited by typing the designated url in address bar.</li>
+            <li>Alternatively, queries for the top three APIs can be simply made by clicking the designated hyperlink.</li>
+            <li>The bottom two APIs require the replacement of highlighted keywords 
+                <mark>start</mark> and/or <mark>end</mark> with query dates in <br>"<strong>yyyy-mm-dd</strong>" format if typed in address bar.</li>
+            <li>An alternative query for the bottom two APIs is to directly select dates from drop-down menu and click "Search".</li>
+            <li>Note that date entry must between "2010-01-01" and "2017-08-23", inclusive.</li>
+        </ol>
+        <hr width=75%/>
+        <br>
         <footer>
-            <p>Posted by: Lei Kang</p>
-            <p>Contact information: <a href="mailto:koudash@gmail.com">koudash@gmail.com</a>.</p>
+            Posted by: Lei Kang<br>
+            Contact information: <a href="mailto:koudash@gmail.com">koudash@gmail.com</a>
         </footer>
     </body>
 </html>
