@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Index for ClimateApp</title>
+    </head>
+    <body>
+        <!-- Set background color for route list -->
+        <div style="background-color:greenyellow">
+            <h1>Available ClimateApp Routes:</h1>
+            <!--Add horizontal line-->
+            <hr align='left' width='50%' noshade/>
+            <!--Display available routes as bulleted list-->
+            <ul type='circle'>
+                <!-- Hyperlink to webpage of designated module -->
+                <li><a href="/api/precipitation" target=_blank><h3>/api/precipitation</h3></a></li>
+                <li><a href="/api/stations" target=_blank><h3>/api/stations</h3></a></li>
+                <li><a href="/api/temperature" target=_blank><h3>/api/temperature</h3></a></li>
+                <!-- Concatenate date input with basic localhost url and hyperlink to webpage -->
+                <li><form id = "s_form" onsubmit="s_append()" method='post' target=_blank><h3>/api/<span style="color:blue">start</span><sup>*</sup></h3>Enter start date: 
+                    <input type="date" name="s">
+                    <input type="submit" value="Search">
+                    </form></li>                             
+                <li><form id = "se_form" onsubmit="se_append()" method='post' target=_blank><h3>/api/<span style="color:blue">start</span>/<span style="color:blue">end</span><sup>**</sup></h3>
+                    Enter start date: <input type="date" name="s_se">&emsp;Enter end date: <input type="date" name="e_se">
+                    <input type="submit" value="Search">
+                    </form></li>
+                
+                    <script>
+                    function s_append(){
+                      var action_src = "/api/" + document.getElementsByName("s")[0].value;
+                      var s_form = document.getElementById('s_form');
+                      s_form.action = action_src;
+                  }
+                    function se_append(){
+                        var action_src = "/api/" + document.getElementsByName("s_se")[0].value + "/" + document.getElementsByName("e_se")[0].value;
+                        var se_form = document.getElementById('se_form');
+                        se_form.action = action_src;
+                }
+                    </script>                 
+            </ul>
+        </div>
+        <hr align='left' width='50%'/>
+        <!--Paragraph-->
+        <p><strong>*,**: <span style="color:blue"> start</span>, <span style="color:blue">end</span></strong> represent start and end dates for temperature query in the format of <strong>"yyyy-mm-dd"</strong>.<br/>
+            <strong>NOTE:</strong> Date entry between "2010-01-01" and "2017-08-23", inclusive.</p>
+        <hr align='left' width='50%'/>
+        <!--Add footer-->
+        <br/>
+        <br/>
+        <footer>
+            <p>Posted by: Lei Kang</p>
+            <p>Contact information: <a href="mailto:koudash@gmail.com">koudash@gmail.com</a>.</p>
+        </footer>
+    </body>
+</html>

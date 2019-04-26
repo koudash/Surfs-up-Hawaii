@@ -15,7 +15,7 @@ import datetime as dt
 #################################################
 
 # Create the connection engine
-engine = create_engine('sqlite:///Resources/hawaii.sqlite')
+engine = create_engine('sqlite:///../Resources/hawaii.sqlite')
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -138,10 +138,9 @@ def tobs_1yr():
     return jsonify(all_tobs_1yr)
 # >>>>>>>>>>> I AM A ROUTE SEPARATOR <<<<<<<<<<< #
 
-# >>> ROUTE 5A <<< #
+# >>> ROUTE 5 <<< #
 # Define actions for "/api/<start>" route
-# NOTE: Return the same results as route "/api/start" (route 5B) does but take input from the address bar (ab) of browser
-@ClimateApp.route("/api/<start>")
+@ClimateApp.route("/api/<start>", methods=['GET', 'POST'])
 def tobs_start_ab(start):
     '''Return a JSON list of the min, avg, and max tobs data for all dates no earlier than the start date'''
 
@@ -167,83 +166,11 @@ def tobs_start_ab(start):
     return jsonify(all_tobs_start)
 # >>>>>>>>>>> I AM A ROUTE SEPARATOR <<<<<<<<<<< #
 
-# >>> ROUTE 5B <<< #
-# Define actions for "/api/start" route
-# NOTE: Returns the same results as route "/api/<start>" (route 5A) does but take form input
-@ClimateApp.route("/api/start", methods=['POST'])
-def tobs_start():
-    '''Return a JSON list of the min, avg, and max tobs data for all dates no earlier than the start date'''
-
-    # Take date input from html form
-    start = request.form['date_shuttle']
-
-    # List to store the arguments of Station queries
-    sel_tobs_start = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
-
-    # Query for ("date", "tobs") data with date no earlier than "start" date
-    tobs_start_retrv = session.query(*sel_tobs_start).filter(Measurement.date >= start).all()
-
-    # Close session
-    session.close()
-
-    # Create list of dictionaries data type to store "date" and "tobs" data for all dates no earlier than the start date
-    all_tobs_start = []
-    for tmin, tavg, tmax in tobs_start_retrv:
-        tobs_start_dict = {'start_date':start}
-        tobs_start_dict['tmin'] = tmin
-        tobs_start_dict['tavg'] = tavg
-        tobs_start_dict['tmax'] = tmax
-        all_tobs_start.append(tobs_start_dict)
-    
-    # Return JSON format of "all_tobs_start"
-    return jsonify(all_tobs_start)
-# >>>>>>>>>>> I AM A ROUTE SEPARATOR <<<<<<<<<<< #
-
-# >>> ROUTE 6A <<< #
+# >>> ROUTE 6 <<< #
 # Define actions for "/api/<start>/<end>" route
-# NOTE: Return the same results as route "/api/start/end" (route 6B) does but take input from the address bar (ab) of browser
-@ClimateApp.route("/api/<start>/<end>")
+@ClimateApp.route("/api/<start>/<end>", methods=['GET', 'POST'])
 def tobs_start_end_ab(start, end):
     '''Return a JSON list of the min, avg, and max tobs data for all dates between the start and end dates (inclusive)'''
-
-    # List to store the arguments of Station queries
-    sel_tobs_start_end = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
-
-    # Query for ("date", "tobs") data with date no earlier than "start" date
-    tobs_start_end_retrv = session.query(*sel_tobs_start_end).filter(Measurement.date >= start).\
-        filter(Measurement.date <= end).all()
-
-    # Close session
-    session.close()
-
-    # Create list of dictionaries data type to store "date" and "tobs" data for all dates no earlier than the start date
-    all_tobs_start_end = []
-    for tmin, tavg, tmax in tobs_start_end_retrv:
-        tobs_start_end_dict = {'start_date':start, 'end_date':end}
-        tobs_start_end_dict['tmin'] = tmin
-        tobs_start_end_dict['tavg'] = tavg
-        tobs_start_end_dict['tmax'] = tmax
-        all_tobs_start_end.append(tobs_start_end_dict)
-
-    # Check if end date is earlier than start date
-    if dt.datetime.strptime(start, "%Y-%m-%d") <= dt.datetime.strptime(end, "%Y-%m-%d"):    
-        # Return JSON format of "all_tobs_start"
-        return jsonify(all_tobs_start_end)
-    else:
-        # Return message indicating query checkup
-        return f'You serious? End date is earlier than start date. Please double-check your query input!'
-# >>>>>>>>>>> I AM A ROUTE SEPARATOR <<<<<<<<<<< #
-
-# >>> ROUTE 6B <<< #
-# Define actions for "/api/start/end" route
-# NOTE: Return the same results as route "/api/<start>/<end>" (route 6A) does but take form input
-@ClimateApp.route("/api/start/end", methods=['POST'])
-def tobs_start_end():
-    '''Return a JSON list of the min, avg, and max tobs data for all dates between the start and end dates (inclusive)'''
-
-    # Take date input from html form
-    start = request.form['s_dt_shuttle']
-    end = request.form['e_dt_shuttle']
 
     # List to store the arguments of Station queries
     sel_tobs_start_end = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
