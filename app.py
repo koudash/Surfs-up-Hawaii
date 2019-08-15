@@ -33,7 +33,7 @@ session = Session(engine)
 #                  Flask Setup                  #
 #################################################
 
-# Create ClimateApp and pass __name__
+# Create app and pass __name__
 app = Flask(__name__)
 
 #################################################
@@ -42,7 +42,7 @@ app = Flask(__name__)
 
 # >>> ROUTE 1 <<< #
 # Define actions for the index route
-@ClimateApp.route("/")
+@app.route("/")
 def index():
     '''List all available api routes with hyperlinks or submission forms to designated module in this app.'''
     # Display index.html page
@@ -51,7 +51,7 @@ def index():
 
 # >>> ROUTE 2 <<< #
 # Define actions for "/api/precipitation" route
-@ClimateApp.route("/api/precipitation")
+@app.route("/api/precipitation")
 def prcp():
     '''Return a JSON list of precipitation data with "date" set as key'''
 
@@ -76,7 +76,7 @@ def prcp():
 
 # >>> ROUTE 3 <<< #
 # Define actions for "/api/stations" route
-@ClimateApp.route("/api/stations")
+@app.route("/api/stations")
 def sta():
     '''Return a JSON list of stations info'''
 
@@ -106,7 +106,7 @@ def sta():
 
 # >>> ROUTE 4 <<< #
 # Define actions for "/api/temperature" route
-@ClimateApp.route("/api/temperature")
+@app.route("/api/temperature")
 def tobs_1yr():
     '''Return a JSON list of Temperature Observations (tobs) within one-year interval from the latest documented date'''
 
@@ -140,7 +140,7 @@ def tobs_1yr():
 
 # >>> ROUTE 5 <<< #
 # Define actions for "/api/<start>" route
-@ClimateApp.route("/api/<start>", methods=['GET', 'POST'])
+@app.route("/api/<start>", methods=['GET', 'POST'])
 def tobs_start_ab(start):
     '''Return a JSON list of the min, avg, and max tobs data for all dates no earlier than the start date'''
 
@@ -168,7 +168,7 @@ def tobs_start_ab(start):
 
 # >>> ROUTE 6 <<< #
 # Define actions for "/api/<start>/<end>" route
-@ClimateApp.route("/api/<start>/<end>", methods=['GET', 'POST'])
+@app.route("/api/<start>/<end>", methods=['GET', 'POST'])
 def tobs_start_end_ab(start, end):
     '''Return a JSON list of the min, avg, and max tobs data for all dates between the start and end dates (inclusive)'''
 
