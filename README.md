@@ -20,5 +20,5 @@
 <p><strong>Estimated daily normal temperatures for planned trip:</strong></p>
 <img src="./static/images/daily_normal_temperature.png" alt="Est Trip TDaily">
 
-<p>Moreover, Flask API server was developed upon the aforementioned sqlite database files. Inqueries from customer and data returning thereafter were interfaced through HTML. Application is deployed on Heroku and can be accessed <a href="https://surfs-up-hawaii.herokuapp.com/" target="_blank">here</a>.</p>
+<p>Moreover, Flask API server was developed upon the aforementioned sqlite database files. Inqueries from customer and data returning thereafter were interfaced through HTML. Application is deployed on Heroku and can be accessed <a href="https://surfs-up-hawaii.herokuapp.com/">here</a>.</p>
 <img src="./static/images/screenshot_api.png" alt="API Screenshot">
