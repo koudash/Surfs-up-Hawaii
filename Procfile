@@ -1,1 +1,1 @@
-web: gunicorn app:ClimateApp
+web: gunicorn ClimateApp:app
