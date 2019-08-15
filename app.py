@@ -34,7 +34,7 @@ session = Session(engine)
 #################################################
 
 # Create ClimateApp and pass __name__
-ClimateApp = Flask(__name__)
+app = Flask(__name__)
 
 #################################################
 #                  Flask Routes                 #
@@ -202,4 +202,4 @@ def tobs_start_end_ab(start, end):
 
 # Execute the script
 if __name__ == '__main__':
-    ClimateApp.run(debug=True)
+    app.run(debug=True)
