@@ -1,6 +1,6 @@
 # Surfs-up-Hawaii!
 
-<img src="./static/images/surfs-up.jpeg.png" alt="Surfs Up">
+<img src="./static/images/surfs-up.jpeg" alt="Surfs Up">
 
 <p><strong>Ready for a trip to Hawaii? Better check the weather there before you go!</strong></p>
 
